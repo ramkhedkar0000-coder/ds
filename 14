@@ -1,0 +1,46 @@
+# Graph Representation Using Adjacency List
+# Breadth First Search (BFS)
+
+from collections import deque
+
+graph = {
+    'A': ['B', 'C'],
+    'B': ['A', 'D', 'E'],
+    'C': ['A', 'E'],
+    'D': ['B'],
+    'E': ['B', 'C']
+}
+
+
+# BFS Function
+def bfs(start):
+    visited = []
+    queue = deque([start])
+
+    visited.append(start)
+
+    while queue:
+        vertex = queue.popleft()
+        print(vertex, end=" ")
+
+        for neighbour in graph[vertex]:
+            if neighbour not in visited:
+                visited.append(neighbour)
+                queue.append(neighbour)
+
+
+# Display Adjacency List
+print("Adjacency List:")
+
+for vertex in graph:
+    print(vertex, ":", graph[vertex])
+
+
+# Perform BFS
+start = input("\nEnter starting vertex (A-E): ").upper()
+
+if start in graph:
+    print("BFS Traversal:")
+    bfs(start)
+else:
+    print("Invalid starting vertex!")

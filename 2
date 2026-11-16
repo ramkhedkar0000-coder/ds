@@ -1,0 +1,45 @@
+
+# Linear Search and Binary Search
+
+# Accept customer IDs
+ids = list(map(int, input("Enter customer IDs: ").split()))
+
+# Accept ID to search
+key = int(input("Enter customer ID to search: "))
+
+# Linear Search
+found = False
+
+for i in range(len(ids)):
+    if ids[i] == key:
+        print("Linear Search: ID found at position", i + 1)
+        found = True
+        break
+
+if not found:
+    print("Linear Search: ID not found")
+
+
+# Binary Search
+ids.sort()
+
+low = 0
+high = len(ids) - 1
+found = False
+
+while low <= high:
+    mid = (low + high) // 2
+
+    if ids[mid] == key:
+        print("Binary Search: ID found at position", mid + 1)
+        found = True
+        break
+
+    elif key < ids[mid]:
+        high = mid - 1
+
+    else:
+        low = mid + 1
+
+if not found:
+    print("Binary Search: ID not found")

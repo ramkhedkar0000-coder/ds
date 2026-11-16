@@ -1,0 +1,144 @@
+# Student Record Management Using Singly Linked List
+
+class Node:
+    def __init__(self, roll, name, marks):
+        self.roll = roll
+        self.name = name
+        self.marks = marks
+        self.next = None
+
+
+head = None
+
+
+# Add Student
+def add_student(roll, name, marks):
+    global head
+
+    new_node = Node(roll, name, marks)
+
+    if head is None:
+        head = new_node
+    else:
+        temp = head
+
+        while temp.next is not None:
+            temp = temp.next
+
+        temp.next = new_node
+
+    print("Student added successfully!")
+
+
+# Display Students
+def display_students():
+    temp = head
+
+    if temp is None:
+        print("No student records found!")
+        return
+
+    while temp is not None:
+        print("Roll Number:", temp.roll)
+        print("Name:", temp.name)
+        print("Marks:", temp.marks)
+        print("------------------")
+
+        temp = temp.next
+
+
+# Search Student
+def search_student(roll):
+    temp = head
+
+    while temp is not None:
+        if temp.roll == roll:
+            print("Student Found!")
+            print("Name:", temp.name)
+            print("Marks:", temp.marks)
+            return
+
+        temp = temp.next
+
+    print("Student not found!")
+
+
+# Update Student
+def update_student(roll):
+    temp = head
+
+    while temp is not None:
+        if temp.roll == roll:
+            temp.name = input("Enter new name: ")
+            temp.marks = float(input("Enter new marks: "))
+            print("Student updated successfully!")
+            return
+
+        temp = temp.next
+
+    print("Student not found!")
+
+
+# Delete Student
+def delete_student(roll):
+    global head
+
+    temp = head
+    previous = None
+
+    while temp is not None:
+        if temp.roll == roll:
+
+            if previous is None:
+                head = temp.next
+            else:
+                previous.next = temp.next
+
+            print("Student deleted successfully!")
+            return
+
+        previous = temp
+        temp = temp.next
+
+    print("Student not found!")
+
+
+# Main Menu
+while True:
+    print("\n--- Student Record Management ---")
+    print("1. Add Student")
+    print("2. Display Students")
+    print("3. Search Student")
+    print("4. Update Student")
+    print("5. Delete Student")
+    print("6. Exit")
+
+    choice = input("Enter your choice: ")
+
+    if choice == '1':
+        roll = int(input("Enter Roll Number: "))
+        name = input("Enter Name: ")
+        marks = float(input("Enter Marks: "))
+        add_student(roll, name, marks)
+
+    elif choice == '2':
+        display_students()
+
+    elif choice == '3':
+        roll = int(input("Enter Roll Number: "))
+        search_student(roll)
+
+    elif choice == '4':
+        roll = int(input("Enter Roll Number: "))
+        update_student(roll)
+
+    elif choice == '5':
+        roll = int(input("Enter Roll Number: "))
+        delete_student(roll)
+
+    elif choice == '6':
+        print("Exiting Program...")
+        break
+
+    else:
+        print("Invalid choice! Try again.")

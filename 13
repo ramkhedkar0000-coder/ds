@@ -1,0 +1,46 @@
+# Graph Representation Using Adjacency Matrix
+# Depth First Search (DFS)
+
+vertices = ['A', 'B', 'C', 'D', 'E']
+
+graph = [
+    [0, 1, 1, 0, 0],
+    [1, 0, 0, 1, 1],
+    [1, 0, 0, 0, 1],
+    [0, 1, 0, 0, 0],
+    [0, 1, 1, 0, 0]
+]
+
+visited = []
+
+
+# DFS Function
+def dfs(vertex):
+    index = vertices.index(vertex)
+
+    visited.append(vertex)
+    print(vertex, end=" ")
+
+    for i in range(len(vertices)):
+        if graph[index][i] == 1:
+            next_vertex = vertices[i]
+
+            if next_vertex not in visited:
+                dfs(next_vertex)
+
+
+# Display Adjacency Matrix
+print("Adjacency Matrix:")
+
+for row in graph:
+    print(row)
+
+
+# Perform DFS
+start = input("\nEnter starting vertex (A-E): ").upper()
+
+if start in vertices:
+    print("DFS Traversal:")
+    dfs(start)
+else:
+    print("Invalid starting vertex!")

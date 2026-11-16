@@ -1,0 +1,118 @@
+# Sorting Student Records Using Singly Linked List
+
+class Node:
+    def __init__(self, roll, name, marks):
+        self.roll = roll
+        self.name = name
+        self.marks = marks
+        self.next = None
+
+
+head = None
+
+
+# Add Student
+def add_student(roll, name, marks):
+    global head
+
+    new_node = Node(roll, name, marks)
+
+    if head is None:
+        head = new_node
+    else:
+        temp = head
+
+        while temp.next is not None:
+            temp = temp.next
+
+        temp.next = new_node
+
+    print("Student added successfully!")
+
+
+# Display Students
+def display_students():
+    temp = head
+
+    if temp is None:
+        print("No records found!")
+        return
+
+    while temp is not None:
+        print("Roll:", temp.roll,
+              "Name:", temp.name,
+              "Marks:", temp.marks)
+
+        temp = temp.next
+
+
+# Sort Students
+def sort_students(choice, order):
+    global head
+
+    if head is None:
+        print("No records to sort!")
+        return
+
+    temp = head
+
+    while temp is not None:
+        current = temp.next
+
+        while current is not None:
+
+            if choice == '1':
+                a = temp.roll
+                b = current.roll
+            else:
+                a = temp.marks
+                b = current.marks
+
+            if (order == '1' and a > b) or \
+               (order == '2' and a < b):
+
+                temp.roll, current.roll = current.roll, temp.roll
+                temp.name, current.name = current.name, temp.name
+                temp.marks, current.marks = current.marks, temp.marks
+
+            current = current.next
+
+        temp = temp.next
+
+    print("Records sorted successfully!")
+
+
+# Main Menu
+while True:
+    print("\n--- Student Record Sorting ---")
+    print("1. Add Student")
+    print("2. Display Students")
+    print("3. Sort by Roll Number")
+    print("4. Sort by Marks")
+    print("5. Exit")
+
+    choice = input("Enter your choice: ")
+
+    if choice == '1':
+        roll = int(input("Enter Roll Number: "))
+        name = input("Enter Name: ")
+        marks = float(input("Enter Marks: "))
+        add_student(roll, name, marks)
+
+    elif choice == '2':
+        display_students()
+
+    elif choice == '3':
+        order = input("1. Ascending  2. Descending: ")
+        sort_students('1', order)
+
+    elif choice == '4':
+        order = input("1. Ascending  2. Descending: ")
+        sort_students('2', order)
+
+    elif choice == '5':
+        print("Exiting Program...")
+        break
+
+    else:
+        print("Invalid choice! Try again.")

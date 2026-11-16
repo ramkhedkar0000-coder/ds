@@ -1,0 +1,64 @@
+# Binary Search Tree Insertion and Traversal
+
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+
+# Insert Node
+def insert(root, data):
+    if root is None:
+        return Node(data)
+
+    if data < root.data:
+        root.left = insert(root.left, data)
+
+    elif data > root.data:
+        root.right = insert(root.right, data)
+
+    return root
+
+
+# Inorder Traversal
+def inorder(root):
+    if root:
+        inorder(root.left)
+        print(root.data, end=" ")
+        inorder(root.right)
+
+
+# Preorder Traversal
+def preorder(root):
+    if root:
+        print(root.data, end=" ")
+        preorder(root.left)
+        preorder(root.right)
+
+
+# Postorder Traversal
+def postorder(root):
+    if root:
+        postorder(root.left)
+        postorder(root.right)
+        print(root.data, end=" ")
+
+
+# Main Program
+root = None
+
+n = int(input("Enter number of elements: "))
+
+for i in range(n):
+    value = int(input("Enter value: "))
+    root = insert(root, value)
+
+print("\nInorder Traversal:")
+inorder(root)
+
+print("\nPreorder Traversal:")
+preorder(root)
+
+print("\nPostorder Traversal:")
+postorder(root)

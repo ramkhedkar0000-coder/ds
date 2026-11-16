@@ -1,0 +1,56 @@
+# Hash Table Insertion Using Linear Probing
+
+size = 10
+table = [-1] * size
+
+
+# Hash Function
+def hash_function(key):
+    return key % size
+
+
+# Insert Key
+def insert(key):
+    index = hash_function(key)
+
+    for i in range(size):
+        position = (index + i) % size
+
+        if table[position] == -1:
+            table[position] = key
+            print("Key inserted successfully!")
+            return
+
+    print("Hash Table is Full!")
+
+
+# Display Hash Table
+def display():
+    print("\nHash Table:")
+
+    for i in range(size):
+        print(i, ":", table[i])
+
+
+# Main Menu
+while True:
+    print("\n--- Hash Table ---")
+    print("1. Insert Key")
+    print("2. Display Hash Table")
+    print("3. Exit")
+
+    choice = input("Enter your choice: ")
+
+    if choice == '1':
+        key = int(input("Enter key: "))
+        insert(key)
+
+    elif choice == '2':
+        display()
+
+    elif choice == '3':
+        print("Exiting Program...")
+        break
+
+    else:
+        print("Invalid choice! Try again.")

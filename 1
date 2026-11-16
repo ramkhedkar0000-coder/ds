@@ -1,0 +1,58 @@
+
+# Library Borrowing Records
+
+# Accept number of members
+n = int(input("Enter number of members: "))
+
+if n <= 0:
+    print("Please enter a valid number of members.")
+
+else:
+    books = []
+
+    # Accept borrowing records
+    for i in range(n):
+        count = int(input("Enter books borrowed by member: "))
+
+        if count < 0:
+            print("Invalid input! Enter again.")
+            count = int(input("Enter books borrowed: "))
+
+        books.append(count)
+
+    # Calculate average
+    average = sum(books) / n
+
+    # Find highest and lowest
+    highest = max(books)
+    lowest = min(books)
+
+    # Count zero borrowing members
+    zero_count = books.count(0)
+
+    # Find frequency of each value
+    frequency = {}
+
+    for count in books:
+        if count in frequency:
+            frequency[count] += 1
+        else:
+            frequency[count] = 1
+
+    # Find mode
+    max_frequency = max(frequency.values())
+
+    mode = []
+
+    for count in frequency:
+        if frequency[count] == max_frequency:
+            mode.append(count)
+
+    # Display results
+    print("\n--- Library Borrowing Records ---")
+    print("Borrowing Records:", books)
+    print("Average Books:", average)
+    print("Highest Borrowing:", highest)
+    print("Lowest Borrowing:", lowest)
+    print("Zero Borrowing Members:", zero_count)
+    print("Mode:", mode)

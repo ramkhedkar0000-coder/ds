@@ -1,0 +1,37 @@
+
+# Bubble Sort and Selection Sort
+
+# Accept employee salaries
+salaries = list(map(float, input("Enter employee salaries: ").split()))
+
+# Selection Sort
+selection = salaries.copy()
+
+for i in range(len(selection)):
+    min_index = i
+
+    for j in range(i + 1, len(selection)):
+        if selection[j] < selection[min_index]:
+            min_index = j
+
+    selection[i], selection[min_index] = selection[min_index], selection[i]
+
+print("\nSelection Sort:", selection)
+
+
+# Bubble Sort
+bubble = salaries.copy()
+
+for i in range(len(bubble)):
+    for j in range(len(bubble) - i - 1):
+
+        if bubble[j] > bubble[j + 1]:
+            bubble[j], bubble[j + 1] = bubble[j + 1], bubble[j]
+
+print("Bubble Sort:", bubble)
+
+
+# Display Top 5 Highest Salaries
+top_five = bubble[-5:][::-1]
+
+print("Top Five Highest Salaries:", top_five)

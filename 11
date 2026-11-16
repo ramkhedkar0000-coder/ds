@@ -1,0 +1,113 @@
+# Hash Table Searching and Deleting
+# Using Linear Probing
+
+size = 10
+table = [-1] * size
+
+
+# Hash Function
+def hash_function(key):
+    return key % size
+
+
+# Insert Key
+def insert(key):
+    index = hash_function(key)
+
+    for i in range(size):
+        position = (index + i) % size
+
+        if table[position] == key:
+            print("Duplicate key!")
+            return
+
+        if table[position] == -1:
+            table[position] = key
+            print("Key inserted successfully!")
+            return
+
+    print("Hash Table is Full!")
+
+
+# Search Key
+def search(key):
+    index = hash_function(key)
+
+    for i in range(size):
+        position = (index + i) % size
+
+        if table[position] == -1:
+            print("Key not found!")
+            return
+
+        if table[position] == key:
+            print("Key found at index:", position)
+            return
+
+    print("Key not found!")
+
+
+# Delete Key
+def delete(key):
+    index = hash_function(key)
+
+    for i in range(size):
+        position = (index + i) % size
+
+        if table[position] == -1:
+            print("Key not found!")
+            return
+
+        if table[position] == key:
+            table[position] = -2
+            print("Key deleted successfully!")
+            return
+
+    print("Key not found!")
+
+
+# Display Hash Table
+def display():
+    print("\nHash Table:")
+
+    for i in range(size):
+        if table[i] == -1:
+            print(i, ": Empty")
+        elif table[i] == -2:
+            print(i, ": Deleted")
+        else:
+            print(i, ":", table[i])
+
+
+# Main Menu
+while True:
+    print("\n--- Hash Table Management ---")
+    print("1. Insert Key")
+    print("2. Search Key")
+    print("3. Delete Key")
+    print("4. Display Hash Table")
+    print("5. Exit")
+
+    choice = input("Enter your choice: ")
+
+    if choice == '1':
+        key = int(input("Enter key: "))
+        insert(key)
+
+    elif choice == '2':
+        key = int(input("Enter key to search: "))
+        search(key)
+
+    elif choice == '3':
+        key = int(input("Enter key to delete: "))
+        delete(key)
+
+    elif choice == '4':
+        display()
+
+    elif choice == '5':
+        print("Exiting Program...")
+        break
+
+    else:
+        print("Invalid choice! Try again.")

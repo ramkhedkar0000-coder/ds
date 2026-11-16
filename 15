@@ -1,0 +1,74 @@
+# Comparison of BFS and DFS Traversals
+
+from collections import deque
+
+# Adjacency List for BFS
+graph = {
+    'A': ['B', 'C'],
+    'B': ['A', 'D', 'E'],
+    'C': ['A', 'E'],
+    'D': ['B'],
+    'E': ['B', 'C']
+}
+
+# Adjacency Matrix for DFS
+vertices = ['A', 'B', 'C', 'D', 'E']
+
+matrix = [
+    [0, 1, 1, 0, 0],
+    [1, 0, 0, 1, 1],
+    [1, 0, 0, 0, 1],
+    [0, 1, 0, 0, 0],
+    [0, 1, 1, 0, 0]
+]
+
+
+# BFS Function
+def bfs(start):
+    visited = [start]
+    queue = deque([start])
+
+    while queue:
+        vertex = queue.popleft()
+        print(vertex, end=" ")
+
+        for neighbour in graph[vertex]:
+            if neighbour not in visited:
+                visited.append(neighbour)
+                queue.append(neighbour)
+
+
+# DFS Function
+def dfs(start):
+    index = vertices.index(start)
+
+    visited.append(start)
+    print(start, end=" ")
+
+    for i in range(len(vertices)):
+        if matrix[index][i] == 1:
+            next_vertex = vertices[i]
+
+            if next_vertex not in visited:
+                dfs(next_vertex)
+
+
+# Main Program
+start = input("Enter starting vertex (A-E): ").upper()
+
+if start in vertices:
+    print("\nBFS Traversal:")
+    bfs(start)
+
+    visited = []
+
+    print("\nDFS Traversal:")
+    dfs(start)
+
+    print("\n\nComparison:")
+    print("BFS uses Queue (FIFO).")
+    print("DFS uses Stack (LIFO) or Recursion.")
+    print("BFS explores level by level.")
+    print("DFS explores depth-wise.")
+else:
+    print("Invalid starting vertex!")
